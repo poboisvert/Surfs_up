@@ -26,7 +26,7 @@ Measurement = Base.classes.measurement # Storage for Measurement
 Station = Base.classes.station # Storage for Station
 
 
-#import app
+# Import app
 app = Flask(__name__)
 #print("example __name__ = %s", __name__)
 
@@ -81,12 +81,13 @@ def temp_monthly():
 def stats(start=None, end=None):
     sel = [func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)]
 
+    # Code correction from Slack #class-2 - START
     if not end:
-        results = session.query(*sel).\
-            filter(Measurement.date >= start).\
-            filter(Measurement.date <= end).all()
-        temps = list(np.ravel(results))
-        return jsonify(temps)
+     results = session.query(*sel).\
+            filter(Measurement.date >= start).all()
+     temps = list(np.ravel(results))
+     return jsonify(temps)
+     # Code correction from Slack #class-2 - END
 
     results = session.query(*sel).\
         filter(Measurement.date >= start).\
