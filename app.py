@@ -1,5 +1,37 @@
-# FLASK & JSON 
-# JSONIFY https://flask.palletsprojects.com/en/1.1.x/api/#flask.json.jsonify
+# 
+#### Documentation
+#
+## Flask
+#
+# https://www.quora.com/Who-is-behind-Flask-and-what-is-the-story-of-its-creation # History of Flask
+# https://flask.palletsprojects.com/en/1.1.x/quickstart/#routing
+# https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface#WSGI-compatible_applications_and_frameworks
+# https://meyerweb.com/eric/tools/dencoder/
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+# https://github.com/lerocha/chinook-database
+# https://realpython.com/primer-on-python-decorators/
+#
+## SQLAlchemy
+#
+# https://www.sqlalchemy.org/features.html
+# https://docs.sqlalchemy.org/en/13/dialects/
+# https://docs.sqlalchemy.org/en/13/orm/extensions/automap.html
+# https://docs.sqlalchemy.org/en/13/orm/tutorial.html
+# https://docs.sqlalchemy.org/en/13/orm/session_basics.html
+# https://www.w3schools.com/sql/sql_injection.asp
+# https://numpy.org/doc/stable/reference/generated/numpy.ravel.html
+# https://sqlite.org/lang_datefunc.html
+#
+## Authentification - JWT Token (Not use in this module)
+#
+# https://bezkoder.com/react-hooks-jwt-auth/
+#
+### Kernel Setup
+#
+# PythonData Kernel: conda activate PythonData && pip install datetime (if missing)
+# 
+### FLASK & JSONIFY https://flask.palletsprojects.com/en/1.1.x/api/#flask.json.jsonify 
+# 
 from flask import Flask, jsonify
 
 # Python Packages - GENERAL DEPENDENCIES
@@ -15,13 +47,14 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 
 # CONNECTION SQL
-engine = create_engine("sqlite:///hawaii.sqlite")
-session = Session(engine) # Session SQL
+engine = create_engine("sqlite:///hawaii.sqlite") # In order to connect to our SQLite database
+session = Session(engine) # Session SQL - SQLAlchemy Session to query our database
 
-Base = automap_base()
-Base.prepare(engine, reflect=True)
+Base = automap_base() # Automap Base creates a base class for an automap schema in SQLAlchemy 
+Base.prepare(engine, reflect=True) # we'll reflect the schema of our SQLite tables into our code and create mappings
+Base.classes.keys() # Confirm that the Automap was able to find all of the data in the SQLite database
 
-# Key variables
+# Key variables - Specific class
 Measurement = Base.classes.measurement # Storage for Measurement
 Station = Base.classes.station # Storage for Station
 
